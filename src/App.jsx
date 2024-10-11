@@ -9,30 +9,30 @@ import FoodInput from './components/FoodInput'
 function App() {
   const [count, setCount] = useState(0)
 
- let foodItems = ['Dal', 'Green Veggies', 'Roti', 'Salad', 'Milk','Cheese','Water'];
 
-//  let textStateArr = useState("food entered by user");
-//  let textToShow = textStateArr[0];
-//  let setTextState = textStateArr[1];
+// let [textToShow , setTextState] = useState();
+let [foodItems, setFoodItems] = useState([]);
 
-let [textToShow , setTextState] = useState("food entered by user");
+//  console.log(`cuurent value of text state ${textToShow}`);
+ //let textToShow = "food entered by user";
 
- console.log(`cuurent value of text state ${textToShow}`);
-
-//  let textToShow = "food entered by user";
-
- const handleOnChange = (event) => {
-   console.log(event.target.value);
-   setTextState(event.target.value);
+ const onKeyDown = (event) => {
+  if(event.key === "Enter"){
+    let newFoodItem = event.target.value;
+    let newItems = [...foodItems, newFoodItem];
+    setFoodItems(newItems);
+    console.log(newFoodItem);
+  }
    };
+
 
   return (
     <>
     <Container>
     <h1 className='food-heading'>Healthy Food</h1>
+    <FoodInput handleKeyDown={onKeyDown}></FoodInput>
     <ErrorMessage items={foodItems}></ErrorMessage>
-    <FoodInput handleOnChange={handleOnChange}></FoodInput>
-    <p>{textToShow}</p>
+    {/* {<p>{textToShow}</p>} */}
     <FoodItems items={foodItems}></FoodItems>
     </Container>
 
